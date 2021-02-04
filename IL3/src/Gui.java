@@ -85,7 +85,9 @@ Snygga gärna till/gör ett eget. Men tänk på att gör GUI:s INTE är ett kursmoment
             ActionListener inputListener = e -> {
                 this.command = input.getText();
                 this.gotCommand = true;
-                System.out.println(this.command);};
+                System.out.println(this.command);
+                this.input.setText("");
+            };
 
             input.addActionListener(inputListener);
 
