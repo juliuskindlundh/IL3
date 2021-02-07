@@ -23,7 +23,7 @@ public abstract class Person {
 			currentRoom--;
 			return true;
 		}
-		else if(direction.startsWith("l") && currentRoom <= 2){
+		else if(direction.startsWith("r") && currentRoom <= 2){
 			currentRoom++;
 			return true;
 		}

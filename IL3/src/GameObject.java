@@ -1,20 +1,20 @@
 
 public abstract class GameObject {
 	
-	private int type = 0;
 	private int id;
 	private String name;
+	private boolean isContainer = false;
+	private boolean isMovable = false;
+	private String description;
 	
-	GameObject(){
-
+	GameObject(int id,String name){
+		this.id = id;
+		this.name = name;
 	}
-
-	public final int getType() {
-		return type;
-	}
-
-	public final void setType(int type) {
-		this.type = type;
+	
+	public String toString() {
+		return name;
+		
 	}
 
 	public final int getId() {
@@ -31,6 +31,35 @@ public abstract class GameObject {
 
 	public final void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isContainer() {
+		return isContainer;
+	}
+
+	public void setIsContainer(boolean isContainer) {
+		this.isContainer = isContainer;
+	}
+
+	public boolean isMovable() {
+		return isMovable;
+	}
+
+	public void setMovable(boolean isMovable) {
+		this.isMovable = isMovable;
+	}
+
+	public String getDescription() {
+		if(description.equals(null)) {
+			return name;
+		}
+		else {
+			return description;
+		}
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 

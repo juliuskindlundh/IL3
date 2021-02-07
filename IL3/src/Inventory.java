@@ -31,8 +31,17 @@ public class Inventory {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		Arrays.stream(inventory).forEach(a->sb.append(a.toString()));
+		Arrays.stream(inventory).forEach(a->sb.append(a.toString()+"\n"));
 		return sb.toString();
+	}
+	
+	public boolean hasSpace() {
+		if(nrOfItems < inventory.length) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 

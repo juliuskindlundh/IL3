@@ -5,6 +5,7 @@ public class Game {
 	private int currentID = 0;
 	private ArrayListLock gameObjects = new ArrayListLock("GameObject");
 	private ArrayListLock persons = new ArrayListLock("Person");
+	private 
 	private Gui gui;
 	Game(){
 		setRunning(true);
@@ -13,13 +14,8 @@ public class Game {
 		
 
 		
-		//Create and start the npcs
-		persons.getLock().lock();
-		persons.getArrayList().add(new Player("Player", 0, currentID));
-		currentID++;
-		persons.getArrayList().add(new Npc("npc_1", 0, currentID));
-		currentID++;
-		persons.getLock().unlock();
+		makeStuff();
+
 		
 		//Start updating the gui
 		Thread t = new Thread(update);
@@ -47,5 +43,19 @@ public class Game {
 
 	public Gui getGui() {
 		return gui;
+	}
+	
+	private void makeStuff() {
+		persons.getLock().lock();
+		persons.getArrayList().add(new Player("Player", 0, currentID));
+		currentID++;
+		persons.getArrayList().add(new Npc("npc_1", 0, currentID));
+		currentID++;
+		persons.getLock().unlock();
+		
+		gameObjects.getLock().lock();
+		gameObjects.add(new Container("Desk", currentID, false, 10, false, 0));
+		currentID++;
+		gameObjects.getLock().unlock();
 	}
 }
