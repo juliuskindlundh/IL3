@@ -5,7 +5,7 @@ public class Game {
 	private int currentID = 0;
 	private ArrayListLock gameObjects = new ArrayListLock("GameObject");
 	private ArrayListLock persons = new ArrayListLock("Person");
-	private 
+	private Room room;
 	private Gui gui;
 	Game(){
 		setRunning(true);
