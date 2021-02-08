@@ -13,6 +13,9 @@ public class ArrayListLock {
 		else if(type.equals("Person")) {
 			arrList = new ArrayList<Person>();
 		}
+		else if(type.equals("Room")) {
+			arrList = new ArrayList<Room>();
+		}
 	}
 
 	public ArrayList getArrayList() {

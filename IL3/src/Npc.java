@@ -1,8 +1,9 @@
 import java.util.Random;
 
 public class Npc extends Person implements Runnable{
-	Npc(String name, int startRoom, int id) {
-		super(name, startRoom, id);
+	Npc(String name, int startRoom, int id, Game game) {
+		super(name, startRoom, id,game);
+		this.setInventory(new Inventory(1));
 		// TODO Auto-generated constructor stub
 	}
 

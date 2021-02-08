@@ -28,7 +28,7 @@ public class Container extends GameObject{
 	}
 	
 	public void unlock(Key k) {
-		if(k.getId() == lockId) {
+		if(k.getLockId() == lockId) {
 			isLocked = false;
 		}
 		else {

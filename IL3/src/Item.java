@@ -1,7 +1,7 @@
 
 public class Item extends GameObject{
 
-	Item(int type, int id, String name,boolean isMovable) {
+	Item(String name, int id, boolean isMovable) {
 		super(id, name);
 		this.setMovable(isMovable);		
 	}

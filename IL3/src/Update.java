@@ -21,7 +21,7 @@ public class Update implements Runnable {
 			try {				
 				CT = System.currentTimeMillis();
 				if(CT - LT >= updateTime) {
-					LT = CT;					
+					LT = CT;
 					updateGui();
 					action = readGui();
 					if(action != null && action != lastAction) {
@@ -52,34 +52,15 @@ public class Update implements Runnable {
 	}
 	
 	private void updateInventory() {
-
+		this.game.getGui().setShowPersons(this.game.getRooms().get(this.game.getCurrentRoom()).showPersons());
 	}
 	
 	private void updateRoom() {
-		game.getGameObjects().getLock().lock();
-		sb.append("Room "+((Person) this.game.getPersons().get(0)).getCurrentRoom()+"\n");
-		for(Object i:game.getGameObjects().getArrayList()) {
-			sb.append(((GameObject) i).toString()); // change this
-			sb.append("\n");
-		}
-		this.game.getGui().setShowRoom(sb.toString());
-		sb.delete(0, sb.length());
-		game.getGameObjects().getLock().unlock();
-		
+		this.game.getGui().setShowRoom(this.game.getRooms().get(this.game.getCurrentRoom()).showRoom());
 	}
 	
 	private void updatePersons() {
-		game.getPersons().getLock().lock();
-		//update persons
-		for(Object i:game.getPersons().getArrayList()) {
-			if(((Person) i).getCurrentRoom() == ((Person) this.game.getPersons().get(0)).getCurrentRoom()) {
-				sb.append(i.toString());
-				sb.append("\n");
-			}
-		}
-		this.game.getGui().setShowPersons(sb.toString());
-		sb.delete(0, sb.length());
-		game.getPersons().getLock().unlock();
+		
 	}
 
 }

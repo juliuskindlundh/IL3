@@ -3,33 +3,48 @@ import java.util.Random;
 public abstract class Person {
 	private int currentRoom;
 	private Inventory inventory;
+	private Inventory targetInventory;
 	private String name;
 	private boolean pause;
 	private int id;
-
+	private Game game;
 	
-	Person(String name, int startRoom, int id){
+	
+	Person(String name, int startRoom, int id,Game game){
 		this.setName(name);
 		this.setCurrentRoom(startRoom);
-		this.setId(id);		
+		this.setId(id);
+		this.game = game;		
 	}
 	
 	public final String toString() {
 		return this.name;
 	}
 	
-	public final boolean move(String direction) {
+	public boolean move(String direction) {
 		if(direction.startsWith("l") && currentRoom >= 1) {
 			currentRoom--;
+			this.game.getRooms().get(this.game.getCurrentRoom() + 1).removePersonById(this.getId());
 			return true;
 		}
 		else if(direction.startsWith("r") && currentRoom <= 2){
 			currentRoom++;
+			this.game.getRooms().get(this.game.getCurrentRoom() - 1).removePersonById(this.getId());
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+	
+	public boolean pickUp(GameObject go) {
+			if(go.isMovable()) {
+				//this.game.get
+				return true;	
+			}
+			else {
+				return false;
+			}
 	}
 
 	public final int getCurrentRoom() {
@@ -70,6 +85,18 @@ public abstract class Person {
 
 	public final void setId(int id) {
 		this.id = id;
+	}
+	
+	public final Game getGame() {
+		return this.game;
+	}
+
+	public Inventory getTargetInventory() {
+		return targetInventory;
+	}
+
+	public void setTargetInventory(Inventory targetInventory) {
+		this.targetInventory = targetInventory;
 	}
 
 	

@@ -9,11 +9,24 @@ public class ActionHandler {
 	}
 	
 	public void handleAction(String action) {
-		if(action.equals("move left")) {
-			((Person) this.game.getPersons().getArrayList().get(0)).move("left");
+		if(action.equalsIgnoreCase("move left") || action.equalsIgnoreCase("ml")) {
+			this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).move("left");
 		}
-		if(action.equals("move rigth")) {
-			((Person) this.game.getPersons().getArrayList().get(0)).move("rigth");
+		else if(action.equalsIgnoreCase("move rigth") || action.equalsIgnoreCase("mr")) {
+			this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).move("rigth");
 		}
+		
+		handleShowInv(action);
+	}
+
+	private void handleShowInv(String action) {
+		if(action.equalsIgnoreCase("show inv") || action.equalsIgnoreCase("show inventory") || action.equalsIgnoreCase("si")) {
+			int startOfTarget = action.lastIndexOf(" ");
+			if(true) {
+				this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getInventory().toString());
+				System.out.println(this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getInventory().toString());
+			}
+		}
+		
 	}
 }

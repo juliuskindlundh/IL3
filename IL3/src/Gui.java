@@ -48,8 +48,8 @@ Snygga gärna till/gör ett eget. Men tänk på att gör GUI:s INTE är ett kursmoment
         	}
             this.showPersons.setText(persons);
         }
-        public void setShowInventory(Inventory i){
-            this.input.setText(i.toString());
+        public void setShowInventory(String s){
+            this.inventory.setText("Inventory\n"+s);
         }
 
         //Add person to room

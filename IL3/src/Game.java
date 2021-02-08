@@ -3,18 +3,20 @@ import java.util.ArrayList;
 public class Game {
 	private boolean running = false;
 	private int currentID = 0;
-	private ArrayListLock gameObjects = new ArrayListLock("GameObject");
-	private ArrayListLock persons = new ArrayListLock("Person");
-	private Room room;
+	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private int currentRoom;
 	private Gui gui;
+	private Factory factory = new Factory(this);
+	public boolean debug = true;
 	Game(){
 		setRunning(true);
 		gui = new Gui();
 		Update update = new Update(this);
 		
-
+		factory.start();
+		setCurrentRoom(factory.getStartRoom());
 		
-		makeStuff();
+		
 
 		
 		//Start updating the gui
@@ -33,29 +35,20 @@ public class Game {
 		return currentID;
 	}
 
-	public ArrayListLock getGameObjects() {
-		return gameObjects;
-	}
-
-	public ArrayListLock getPersons() {
-		return persons;
-	}
-
 	public Gui getGui() {
 		return gui;
 	}
 	
-	private void makeStuff() {
-		persons.getLock().lock();
-		persons.getArrayList().add(new Player("Player", 0, currentID));
-		currentID++;
-		persons.getArrayList().add(new Npc("npc_1", 0, currentID));
-		currentID++;
-		persons.getLock().unlock();
-		
-		gameObjects.getLock().lock();
-		gameObjects.add(new Container("Desk", currentID, false, 10, false, 0));
-		currentID++;
-		gameObjects.getLock().unlock();
+
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+
+	public int getCurrentRoom() {
+		return currentRoom;
+	}
+
+	public void setCurrentRoom(int currentRoom) {
+		this.currentRoom = currentRoom;
 	}
 }

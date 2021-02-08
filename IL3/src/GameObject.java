@@ -13,8 +13,7 @@ public abstract class GameObject {
 	}
 	
 	public String toString() {
-		return name;
-		
+		return name;		
 	}
 
 	public final int getId() {
