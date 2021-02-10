@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Game {
 	private boolean running = false;
@@ -8,17 +10,29 @@ public class Game {
 	private Gui gui;
 	private Factory factory = new Factory(this);
 	public boolean debug = true;
+	private Lock lock = new ReentrantLock();
 	Game(){
 		setRunning(true);
 		gui = new Gui();
 		Update update = new Update(this);
-		
 		factory.start();
 		setCurrentRoom(factory.getStartRoom());
-			
-		//Start updating the gui
+		this.startAllNpcs();
 		Thread t = new Thread(update);
-		t.run();	
+		System.out.println("starting update");
+		t.start();;
+	}
+	
+	public void startAllNpcs() {
+		for(Room r:this.getRooms()) {
+			for(Person p:r.getPersons()) {
+				if(p.getId()!=0) {
+					Thread t = new Thread(((Npc)(p)));
+					t.start();
+				}				
+			}
+		}
+		System.out.println("all npcs running");
 	}
 		
 	public boolean isRunning() {
@@ -47,5 +61,9 @@ public class Game {
 
 	public void setCurrentRoom(int currentRoom) {
 		this.currentRoom = currentRoom;
+	}
+
+	public Lock getLock() {
+		return lock;
 	}
 }

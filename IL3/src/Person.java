@@ -25,12 +25,14 @@ public abstract class Person {
 	public boolean move(String direction) {
 		if(direction.startsWith("l") && currentRoom >= 1) {
 			setCurrentRoom(getCurrentRoom() - 1);
+			this.getGame().getRooms().get(this.getCurrentRoom()).getPersons().add(this);
 			this.game.getRooms().get(this.getCurrentRoom() + 1).removePersonById(this.getId());
 			this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 			return true;
 		}
 		else if(direction.startsWith("r") && currentRoom <= 2){
 			setCurrentRoom(getCurrentRoom() + 1);
+			this.getGame().getRooms().get(this.getCurrentRoom()).getPersons().add(this);
 			this.game.getRooms().get(this.getCurrentRoom() - 1).removePersonById(this.getId());
 			this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 			return true;

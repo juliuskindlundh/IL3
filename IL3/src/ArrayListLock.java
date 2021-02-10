@@ -7,15 +7,7 @@ public class ArrayListLock {
 	private Lock lock = new ReentrantLock();
 	
 	ArrayListLock(String type){
-		if(type.equals("GameObject")) {
-			arrList = new ArrayList<GameObject>();
-		}
-		else if(type.equals("Person")) {
-			arrList = new ArrayList<Person>();
-		}
-		else if(type.equals("Room")) {
-			arrList = new ArrayList<Room>();
-		}
+		this.arrList = new ArrayList<Room>();
 	}
 
 	public ArrayList getArrayList() {

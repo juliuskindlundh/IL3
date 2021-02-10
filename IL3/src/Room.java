@@ -3,7 +3,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Room {
-	private Lock lock = new ReentrantLock();
 	private String name;
 	private Inventory invenory;
 	private ArrayList<Person> persons;
@@ -53,12 +52,6 @@ public class Room {
 		}
 		return null;
 	}
-
-
-	public Lock getLock() {
-		return lock;
-	}
-
 
 	public void removePersonById(int id) {
 		int i = 0;

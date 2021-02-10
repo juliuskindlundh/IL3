@@ -14,7 +14,6 @@ public class Factory {
 	}
 	
 	public void start() {
-		
 		game.getRooms().add(new Room("Room 1"));
 		game.getRooms().get(0).getInvenory().add(createGameObject(new Item("Flower pot",id,true)));
 		game.getRooms().get(0).getInvenory().add(createGameObject(new Item("Underpants",id,true)));

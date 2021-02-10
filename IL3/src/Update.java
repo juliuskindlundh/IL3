@@ -5,6 +5,7 @@ public class Update implements Runnable {
 	private String action;
 	private String lastAction;
 	private ActionHandler actionHandler;
+	private boolean running;
 	StringBuilder sb = new StringBuilder();
 	Update(Game game){
 		this.game = game;
@@ -13,15 +14,19 @@ public class Update implements Runnable {
 	//updates the gui ~30 time/s
 	@Override
 	public void run(){
+		this.game.getLock().lock();
+		this.setRunning(this.game.isRunning());
 		long LT = 0;
 		long CT = System.currentTimeMillis();
 		int updateTime = 33;
-		this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getInvenory().toString());
-		this.startAllNpcs();
-		while(game.isRunning()) {
+		this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getInvenory().toString());		
+		this.game.getLock().unlock();
+		while(this.isRunning()) {
 			try {				
 				CT = System.currentTimeMillis();
 				if(CT - LT >= updateTime) {
+					this.game.getLock().lock();
+					this.setRunning(this.game.isRunning());
 					LT = CT;
 					updateGui();
 					action = readGui();
@@ -29,6 +34,8 @@ public class Update implements Runnable {
 						this.actionHandler.handleAction(action);
 						lastAction = action;
 					}
+					this.game.getLock().unlock();
+					System.out.println("update unlock");
 				}
 				else {
 					Thread.sleep(1);
@@ -64,17 +71,11 @@ public class Update implements Runnable {
 		this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getTargetInventory().toString());
 	}
 	
-	public void startAllNpcs() {
-		System.out.println("qwer");
-		for(Room r:this.game.getRooms()) {
-			for(Person p:r.getPersons()) {
-				if(p.getId()!=0) {
-					((Npc)p).run();
-				}
-				
-			}
-		}
-		
+	public boolean isRunning() {
+		return running;
+	}
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 
 }

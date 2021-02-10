@@ -6,7 +6,6 @@ public class Inventory {
 	
 	private GameObject[] inventory;
 	private int nrOfItems = 0;
-	private Lock lock = new ReentrantLock();
 	private int cnt = 0;
 	boolean added = false;
 	private GameObject returnObj;
@@ -93,10 +92,6 @@ public class Inventory {
 	
 	public int getNrOfItems() {
 		return nrOfItems;
-	}
-
-	public Lock getLock() {
-		return lock;
 	}
 
 	public GameObject getByName(String target) {

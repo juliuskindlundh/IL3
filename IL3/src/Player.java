@@ -9,15 +9,13 @@ public class Player extends Person{
 	
 	@Override
 	public final boolean move(String direction) {
+		System.out.println("move");
 		if(direction.startsWith("l") && getCurrentRoom() >= 1) {
 			setCurrentRoom(getCurrentRoom() - 1);
 			this.getGame().setCurrentRoom(getCurrentRoom());
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom()).getPersons().add(this);
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom() + 1).removePersonById(this.getId());
 			this.setTargetInventory(this.getGame().getRooms().get(getCurrentRoom()).getInvenory());
-			if(this.getGame().debug) {
-				System.out.println("Person "+this.getId()+" moved left");
-			}
 			return true;
 		}
 		else if(direction.startsWith("r") && getCurrentRoom() <= 2){
@@ -26,9 +24,6 @@ public class Player extends Person{
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom()).getPersons().add(this);
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom() - 1).removePersonById(this.getId());
 			this.setTargetInventory(this.getGame().getRooms().get(getCurrentRoom()).getInvenory());
-			if(this.getGame().debug) {
-				System.out.println("Person "+this.getId()+" moved rigth");
-			}
 			return true;
 		}
 		else {
