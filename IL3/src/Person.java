@@ -42,14 +42,15 @@ public abstract class Person {
 		}
 	}
 	
-	public boolean pickUp(GameObject go) {
+	public void pickUp(GameObject go) {
 			if(go.isMovable()) {
-				//this.game.get
-				return true;	
 			}
 			else {
-				return false;
 			}
+	}
+	
+	public void putDown() {
+		
 	}
 
 	public final int getCurrentRoom() {

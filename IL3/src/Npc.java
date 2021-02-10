@@ -19,13 +19,28 @@ public class Npc extends Person implements Runnable{
 			long CT = System.currentTimeMillis();
 			if(CT >= LT+250) {
 				LT = CT;
-				if(this.rng.nextInt(4) == 3) {
-					this.getGame().getLock().lock();
-					setRunning(this.getGame().isRunning());
-					this.move("rigth");
-					this.getGame().getLock().unlock();
-					System.out.println("npc unlock");
+				this.getGame().getLock().lock();
+				setRunning(this.getGame().isRunning());
+				int next = this.rng.nextInt(100);
+				if(next < 10) {
+					if(next % 2 == 0) {
+						this.move("left");
+					}
+					else {
+						this.move("rigth");
+					}
 				}
+				else if(next < 20){
+					//this.putDown();
+					//this.pickUp();
+				}
+				else {
+					//do nothing
+				}
+				this.move("rigth");
+				
+				
+				this.getGame().getLock().unlock();
 			}
 			else {
 				try {

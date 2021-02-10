@@ -35,7 +35,6 @@ public class Update implements Runnable {
 						lastAction = action;
 					}
 					this.game.getLock().unlock();
-					System.out.println("update unlock");
 				}
 				else {
 					Thread.sleep(1);
