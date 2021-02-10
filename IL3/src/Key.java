@@ -6,6 +6,7 @@ public class Key extends GameObject{
 	Key(int id, String name,int lockId) {
 		super(id, name);
 		this.lockId = lockId;
+		this.setKey(true);
 	}
 
 	public int getLockId() {

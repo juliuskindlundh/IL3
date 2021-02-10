@@ -4,7 +4,7 @@ public class Player extends Person{
 	Player(String name, int startRoom, int id,Game game) {
 		super(name, startRoom, id,game);
 		this.setInventory(new Inventory(5));
-		this.setTargetInventory(this.getInventory());
+		this.setTargetInventory(this.getGame().getRooms().get(this.getCurrentRoom()).getInvenory());
 	}
 	
 	@Override
@@ -14,6 +14,7 @@ public class Player extends Person{
 			this.getGame().setCurrentRoom(getCurrentRoom());
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom()).getPersons().add(this);
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom() + 1).removePersonById(this.getId());
+			this.setTargetInventory(this.getGame().getRooms().get(getCurrentRoom()).getInvenory());
 			if(this.getGame().debug) {
 				System.out.println("Person "+this.getId()+" moved left");
 			}
@@ -24,6 +25,7 @@ public class Player extends Person{
 			this.getGame().setCurrentRoom(getCurrentRoom());
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom()).getPersons().add(this);
 			this.getGame().getRooms().get(this.getGame().getCurrentRoom() - 1).removePersonById(this.getId());
+			this.setTargetInventory(this.getGame().getRooms().get(getCurrentRoom()).getInvenory());
 			if(this.getGame().debug) {
 				System.out.println("Person "+this.getId()+" moved rigth");
 			}

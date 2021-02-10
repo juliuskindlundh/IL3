@@ -7,30 +7,60 @@ public class Inventory {
 	private GameObject[] inventory;
 	private int nrOfItems = 0;
 	private Lock lock = new ReentrantLock();
-	private int last = 0;
+	private int cnt = 0;
+	boolean added = false;
+	private GameObject returnObj;
 	
 	Inventory(int size){
 		inventory = new GameObject[size];
 	}
 	
 	public GameObject remove(int id) {
+		returnObj = null;
 		Arrays.stream(inventory).forEach(a->{
-			if(a.getId() == id) {
-				a = null;
+			if(a != null) {
+				if(a.getId() == id) {
+					returnObj = a;
+					inventory[cnt] = null;
+				}
 			}
+			cnt++;
 		});
+		cnt = 0;
 		nrOfItems--;
-		return null;		
+		return returnObj;		
+	}
+	
+	public GameObject removeByName(String name) {
+		returnObj = null;
+		Arrays.stream(inventory).forEach(a->{
+			if(a != null) {
+				if(a.getName().equalsIgnoreCase(name)) {
+					returnObj = a;
+					inventory[cnt] = null;
+				}
+			}
+			cnt++;
+		});
+		cnt = 0;
+		nrOfItems--;
+		return returnObj;		
 	}
 	
 	public void add(GameObject go) {		
-		Arrays.stream(this.inventory).forEach(a->{
-			if(a == null && nrOfItems == last) {
-				nrOfItems++;
-				inventory[last] = go;
-			}
-		});
-		last = nrOfItems;
+		
+		if(this.hasSpace()) {
+			Arrays.stream(this.inventory).forEach(a->{
+				if(a == null && !added) {
+					added = true;
+					nrOfItems++;
+					inventory[cnt] = go;
+				}
+				cnt++;
+			});
+			added = false;
+			cnt = 0;
+		}
 	}
 	
 	public String toString() {
@@ -67,6 +97,19 @@ public class Inventory {
 
 	public Lock getLock() {
 		return lock;
+	}
+
+	public GameObject getByName(String target) {
+		int i = 0;
+		while(i < this.inventory.length) {
+			if(this.inventory[i] != null) {
+				if(this.inventory[i].getName().equalsIgnoreCase(target)) {
+					return this.inventory[i];
+				}
+			}
+			i++;
+		}
+		return null;		
 	}
 	
 

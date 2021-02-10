@@ -53,4 +53,8 @@ public class Container extends GameObject{
 		}
 	}
 	
+	public Inventory getInventoryForce() {
+		return inventory;
+	}
+	
 }

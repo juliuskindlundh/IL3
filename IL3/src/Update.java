@@ -16,7 +16,8 @@ public class Update implements Runnable {
 		long LT = 0;
 		long CT = System.currentTimeMillis();
 		int updateTime = 33;
-
+		this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getInvenory().toString());
+		this.startAllNpcs();
 		while(game.isRunning()) {
 			try {				
 				CT = System.currentTimeMillis();
@@ -45,13 +46,13 @@ public class Update implements Runnable {
 		return this.game.getGui().getCommand();
 	}
 	
-	private void updateGui() {		
+	private void updateGui() {
 		updatePersons();
 		updateRoom();
 		updateInventory();
 	}
 	
-	private void updateInventory() {
+	private void updatePersons() {
 		this.game.getGui().setShowPersons(this.game.getRooms().get(this.game.getCurrentRoom()).showPersons());
 	}
 	
@@ -59,7 +60,20 @@ public class Update implements Runnable {
 		this.game.getGui().setShowRoom(this.game.getRooms().get(this.game.getCurrentRoom()).showRoom());
 	}
 	
-	private void updatePersons() {
+	private void updateInventory() {
+		this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getTargetInventory().toString());
+	}
+	
+	public void startAllNpcs() {
+		System.out.println("qwer");
+		for(Room r:this.game.getRooms()) {
+			for(Person p:r.getPersons()) {
+				if(p.getId()!=0) {
+					((Npc)p).run();
+				}
+				
+			}
+		}
 		
 	}
 

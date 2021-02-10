@@ -15,13 +15,10 @@ public class Game {
 		
 		factory.start();
 		setCurrentRoom(factory.getStartRoom());
-		
-		
-
-		
+			
 		//Start updating the gui
 		Thread t = new Thread(update);
-		t.run();
+		t.run();	
 	}
 		
 	public boolean isRunning() {

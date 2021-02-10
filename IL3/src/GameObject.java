@@ -5,6 +5,7 @@ public abstract class GameObject {
 	private String name;
 	private boolean isContainer = false;
 	private boolean isMovable = false;
+	private boolean isKey = false;
 	private String description;
 	
 	GameObject(int id,String name){
@@ -59,6 +60,14 @@ public abstract class GameObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isKey() {
+		return isKey;
+	}
+
+	public void setKey(boolean isKey) {
+		this.isKey = isKey;
 	}
 	
 

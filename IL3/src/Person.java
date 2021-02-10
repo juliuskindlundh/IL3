@@ -14,7 +14,8 @@ public abstract class Person {
 		this.setName(name);
 		this.setCurrentRoom(startRoom);
 		this.setId(id);
-		this.game = game;		
+		this.game = game;
+		this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 	}
 	
 	public final String toString() {
@@ -23,13 +24,15 @@ public abstract class Person {
 	
 	public boolean move(String direction) {
 		if(direction.startsWith("l") && currentRoom >= 1) {
-			currentRoom--;
-			this.game.getRooms().get(this.game.getCurrentRoom() + 1).removePersonById(this.getId());
+			setCurrentRoom(getCurrentRoom() - 1);
+			this.game.getRooms().get(this.getCurrentRoom() + 1).removePersonById(this.getId());
+			this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 			return true;
 		}
 		else if(direction.startsWith("r") && currentRoom <= 2){
-			currentRoom++;
-			this.game.getRooms().get(this.game.getCurrentRoom() - 1).removePersonById(this.getId());
+			setCurrentRoom(getCurrentRoom() + 1);
+			this.game.getRooms().get(this.getCurrentRoom() - 1).removePersonById(this.getId());
+			this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 			return true;
 		}
 		else {
