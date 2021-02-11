@@ -28,7 +28,8 @@ public class Factory {
 		game.getRooms().get(0).getPersonById(0).getInventory().add(createGameObject(new Item("Fork",id,true)));;
 		
 		game.getRooms().get(0).getPersons().add(createPerson(new Npc("Michigan J Frog",0,pid,this.game)));
-		
+		game.getRooms().get(0).getPersonById(1).getInventory().add(createGameObject(new Item("dog",id,true)));
+		System.out.println(game.getRooms().get(0).getPersonById(1).getCurrentRoom());
 		
 		game.getRooms().add(new Room("Room 2"));
 		game.getRooms().add(new Room("Room 3"));

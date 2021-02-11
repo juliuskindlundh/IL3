@@ -69,9 +69,12 @@ public class ActionHandler {
 	private void handlePickUp(String action) {
 		if(action.contains("pick up")) {
 			String target = action.substring(8);
-			GameObject targetGameObject = this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getTargetInventory().removeByName(target);
+			GameObject targetGameObject = this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getTargetInventory().getByName(target);
 			if(targetGameObject != null) {
-				this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getInventory().add(targetGameObject);
+				if(targetGameObject.isMovable()) {
+					 this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getTargetInventory().removeByName(target);
+					this.game.getRooms().get(this.game.getCurrentRoom()).getPersonById(0).getInventory().add(targetGameObject);
+				}
 			}
 		}
 		

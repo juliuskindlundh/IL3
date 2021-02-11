@@ -7,6 +7,7 @@ public class Key extends GameObject{
 		super(id, name);
 		this.lockId = lockId;
 		this.setKey(true);
+		this.setMovable(true);
 	}
 
 	public int getLockId() {

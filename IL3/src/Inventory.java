@@ -83,11 +83,13 @@ public class Inventory {
 	
 	public String getFirst() {
 		if(this.nrOfItems > 0) {
-			return this.inventory[0].toString();
+			for(int i = 0; i < this.inventory.length; i++) {
+				if(this.inventory[i] != null) {
+					return this.inventory[i].toString();
+				}
+			}
 		}
-		else {
-			return "nothing";
-		}
+		return "nothing";
 	}
 	
 	public int getNrOfItems() {
@@ -105,6 +107,24 @@ public class Inventory {
 			i++;
 		}
 		return null;		
+	}
+	
+	public GameObject[] getInventoryArray(){
+		return inventory;	
+	}
+
+	public GameObject removeByIndex(int i) {
+		returnObj = null;
+		Arrays.stream(inventory).forEach(a->{
+				if(cnt == i) {
+					returnObj = a;
+					inventory[cnt] = null;
+				}
+			cnt++;
+		});
+		cnt = 0;
+		nrOfItems--;
+		return returnObj;
 	}
 	
 

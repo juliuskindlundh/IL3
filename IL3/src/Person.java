@@ -23,14 +23,14 @@ public abstract class Person {
 	}
 	
 	public boolean move(String direction) {
-		if(direction.startsWith("l") && currentRoom >= 1) {
+		if(direction.equals("left") && currentRoom >= 1) {
 			setCurrentRoom(getCurrentRoom() - 1);
 			this.getGame().getRooms().get(this.getCurrentRoom()).getPersons().add(this);
 			this.game.getRooms().get(this.getCurrentRoom() + 1).removePersonById(this.getId());
 			this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 			return true;
 		}
-		else if(direction.startsWith("r") && currentRoom <= 2){
+		else if(direction.equals("rigth") && currentRoom <= 2){
 			setCurrentRoom(getCurrentRoom() + 1);
 			this.getGame().getRooms().get(this.getCurrentRoom()).getPersons().add(this);
 			this.game.getRooms().get(this.getCurrentRoom() - 1).removePersonById(this.getId());
@@ -40,17 +40,6 @@ public abstract class Person {
 		else {
 			return false;
 		}
-	}
-	
-	public void pickUp(GameObject go) {
-			if(go.isMovable()) {
-			}
-			else {
-			}
-	}
-	
-	public void putDown() {
-		
 	}
 
 	public final int getCurrentRoom() {
