@@ -1,15 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 /*Extremt enkelt Gui för att kunna komma igång.
 Snygga gärna till/gör ett eget. Men tänk på att gör GUI:s INTE är ett kursmoment - så fastna inte här!
  */
 
 
-    public class Gui extends JFrame {
+    public class Gui extends JFrame implements Serializable{
 
-        private JPanel panel;
+        /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		private JPanel panel;
         private JTextArea showRoom;
         private JTextArea showPersons;
         private JTextField input;

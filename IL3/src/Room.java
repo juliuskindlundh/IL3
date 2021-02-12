@@ -1,8 +1,13 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Room {
+public class Room implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private Inventory invenory;
 	private ArrayList<Person> persons;
@@ -64,7 +69,7 @@ public class Room {
 		
 	}
 
-
+	//Creates a string describing who is in the room & what they are carrying
 	public String showPersons() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Persons in "+this.name+"\n");

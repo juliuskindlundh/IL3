@@ -1,6 +1,11 @@
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class Person {
+public abstract class Person implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int currentRoom;
 	private Inventory inventory;
 	private Inventory targetInventory;
@@ -22,6 +27,7 @@ public abstract class Person {
 		return this.name;
 	}
 	
+	//moves a person left or right by adding them to the room they are going to and removing them from the room they are leaving
 	public boolean move(String direction) {
 		if(direction.equals("left") && currentRoom >= 1) {
 			setCurrentRoom(getCurrentRoom() - 1);
@@ -30,7 +36,7 @@ public abstract class Person {
 			this.setTargetInventory(this.game.getRooms().get(this.getCurrentRoom()).getInvenory());
 			return true;
 		}
-		else if(direction.equals("rigth") && currentRoom <= 2){
+		else if(direction.equals("right") && currentRoom <= 2){
 			setCurrentRoom(getCurrentRoom() + 1);
 			this.getGame().getRooms().get(this.getCurrentRoom()).getPersons().add(this);
 			this.game.getRooms().get(this.getCurrentRoom() - 1).removePersonById(this.getId());

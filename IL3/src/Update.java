@@ -1,6 +1,11 @@
+import java.io.Serializable;
 
-public class Update implements Runnable {
+public class Update implements Runnable, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Game game;
 	private String action;
 	private String lastAction;
@@ -11,19 +16,22 @@ public class Update implements Runnable {
 		this.game = game;
 		this.actionHandler = new ActionHandler(this.game,this);
 	}
-	//updates the gui ~30 time/s
+
 	@Override
 	public void run(){
 		this.game.getLock().lock();
 		this.setRunning(this.game.isRunning());
 		long LT = 0;
 		long CT = System.currentTimeMillis();
-		int updateTime = 33;
+		int updateTime = 17;
 		this.game.getGui().setShowInventory(this.game.getRooms().get(this.game.getCurrentRoom()).getInvenory().toString());		
 		this.game.getLock().unlock();
+		
+		//updates the gui and reacts to player input  ~60 times/s
 		while(this.isRunning()) {
 			try {				
 				CT = System.currentTimeMillis();
+				//if it is time to uppdate the gui and react to player input acquire the lock on game
 				if(CT - LT >= updateTime) {
 					this.game.getLock().lock();
 					this.setRunning(this.game.isRunning());

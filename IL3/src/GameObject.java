@@ -1,12 +1,16 @@
+import java.io.Serializable;
 
-public abstract class GameObject {
+public abstract class GameObject implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private boolean isContainer = false;
 	private boolean isMovable = false;
 	private boolean isKey = false;
-	private String description;
 	
 	GameObject(int id,String name){
 		this.id = id;
@@ -47,19 +51,6 @@ public abstract class GameObject {
 
 	public void setMovable(boolean isMovable) {
 		this.isMovable = isMovable;
-	}
-
-	public String getDescription() {
-		if(description.equals(null)) {
-			return name;
-		}
-		else {
-			return description;
-		}
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public boolean isKey() {

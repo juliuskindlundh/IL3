@@ -1,6 +1,11 @@
+import java.io.Serializable;
 
-public class Container extends GameObject{
+public class Container extends GameObject implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Inventory inventory;
 	private boolean isLocked;
 	private int lockId;
@@ -14,6 +19,7 @@ public class Container extends GameObject{
 		this.lockId = lockId;
 	}
 	
+	// Generates a string describing the container
 	@Override
 	public String toString() {
 		String s;
@@ -27,6 +33,7 @@ public class Container extends GameObject{
 		return s;
 	}
 	
+	//attempts to unlock the container
 	public void unlock(Key k) {
 		if(k.getLockId() == lockId) {
 			isLocked = false;
